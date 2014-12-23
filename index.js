@@ -57,19 +57,34 @@ cli.main(function (args, options) {
     }
 
     function docHandler(doc) {
-      var elements = doc.getElementsByTagName('a:t');
-      var note = '';
-      var slideNumber;
-      for (var i in elements) {
-        if (elements.hasOwnProperty(i) && elements[i].textContent) {
-          if (elements[i].parentNode.getAttribute('type') == 'slidenum') {
-            slideNumber = parseInt(elements[i].textContent, 10);
-          } else {
-            note += elements[i].textContent;
+      function rowHandler(row) {
+        var elements = row.getElementsByTagName('a:t');
+        var txt = '';
+        var isSlideNumber = false;
+        for (var i = 0; i < elements.length; i++) {
+          if (elements[i].textContent) {
+            txt += elements[i].textContent.trim() + " ";
           }
         }
+        return txt.trim();
       }
-      if (note.trim() === '') {
+
+      var rows = doc.getElementsByTagName('a:p');
+      var note = '';
+      var slideNumber;
+      var txt;
+      var fldElm;
+      for (var i = 0; i < rows.length; i++) {
+        txt = rowHandler(rows[i]);
+        fldElm = rows[i].getElementsByTagName('a:fld');
+        if (fldElm.length && fldElm[0].getAttribute('type') == 'slidenum') {
+          slideNumber = parseInt(txt, 10);
+        } else {
+          note += txt + "\n";
+        }
+      }
+      note = note.trim();
+      if (note === '') {
         return null;
       }
       return {
