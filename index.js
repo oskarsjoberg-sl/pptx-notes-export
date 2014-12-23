@@ -1,5 +1,5 @@
 
-var cli = require('cli').enable('version', 'status'), options = cli.parse({
+var cli = require('cli').enable('status'), options = cli.parse({
   input: ['i', 'path to .pptx file', 'path']
 });
 
