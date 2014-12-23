@@ -1,0 +1,17 @@
+{
+  "name": "node-export-pptx-notes",
+  "version": "0.0.1",
+  "description": "Extracts notes from a powerpoint (.pptx) presentation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cli": "^0.6.5",
+    "unzip": "~0.1.11",
+    "xmldom": "^0.1.19"
+  },
+  "devDependencies": {
+    "jshint": "^2.5.11"
+  }
+}
